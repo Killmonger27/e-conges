@@ -23,7 +23,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="text" class="form-control" placeholder="Nom" id="first-name-icon" value="{{Auth::user()->nom}}" required >
-                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('nom')" />
+                                            <x-input-error class="mt-2 text-danger" :messages="$errors->get('nom')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -37,7 +37,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="text" class="form-control" placeholder="Prenom" id="first-name-icon" value="{{Auth::user()->prenom}}" required>
-                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('prenom')" />
+                                            <x-input-error class="mt-2 text-danger" :messages="$errors->get('prenom')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -51,7 +51,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="text" class="form-control" placeholder="Fonction" id="first-name-icon" value="{{Auth::user()->fonction_id}}" required>
-                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('fonction_id')" />
+                                            <x-input-error class="mt-2 text-danger" :messages="$errors->get('fonction_id')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -66,7 +66,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="email" class="form-control" placeholder="Email" id="first-name-icon" value="{{Auth::user()->email}}" required>
-                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('email')" />
+                                            <x-input-error class="mt-2 text-danger" :messages="$errors->get('email')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="mail"></i>
                                             </div>
@@ -80,7 +80,7 @@
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
                                             <input type="number" class="form-control" placeholder="Telephone" value="{{Auth::user()->telephone}}" required>
-                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('telephone')" />
+                                            <x-input-error class="mt-2 text-danger" :messages="$errors->get('telephone')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="phone"></i>
                                             </div>

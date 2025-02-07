@@ -1,96 +1,197 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="en">
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - Voler Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Date d'embauche -->
-        <div>
-            <x-input-label for="date_embauche" :value="__('Date d\'embauche')" />
-            <input id="date_embauche" class="block mt-1 w-full" type="date" name="date_embauche" :value="old('date_embauche')" required autofocus autocomplete="date_embauche" />
-            <x-input-error :messages="$errors->get('date_embauche')" class="mt-2" />
-        </div>
-
-        <!-- Salaire -->
-        <div>
-            <x-input-label for="salaire" :value="__('Salaire')" />
-            <x-text-input id="salaire" class="block mt-1 w-full" type="text" name="salaire" :value="old('salaire')" required autofocus autocomplete="date_embauche" />
-            <x-input-error :messages="$errors->get('salaire')" class="mt-2" />
-        </div>
-
-        <!-- Solde congé -->
-        <div>
-            <x-input-label for="solde_conges" :value="__('Solde congé')" />
-            <x-text-input id="solde_conges" class="block mt-1 w-full" type="text" name="solde_conges" :value="old('solde_conges')" required autofocus autocomplete="solde_conges" />
-            <x-input-error :messages="$errors->get('solde_conges')" class="mt-2" />
-        </div>
-
-        <!--Fonction -->
-        <div>
-            <x-input-label for="fonction_id" :value="__('Fonction')" />
-            <x-text-input id="fonction_id" class="block mt-1 w-full" type="text" name="fonction_id" :value="old('fonction_id')" required autofocus autocomplete="fonction_id" />
-            <x-input-error :messages="$errors->get('fonction_id')" class="mt-2" />
-        </div>
-
-        <!-- Service -->
-        <div>
-            <x-input-label for="service_id" :value="__('Service')" />
-            <x-text-input id="service_id" class="block mt-1 w-full" type="text" name="service_id" :value="old('service_id')" required autofocus autocomplete="service_id" />
-            <x-input-error :messages="$errors->get('service_id')" class="mt-2" />
-        </div>
-
-        <!-- Role -->
-        <div>
-            <x-input-label for="type" :value="__('Role')" />
-            <x-text-input id="type" class="block mt-1 w-full" type="text" name="type" :value="old('type')" required autofocus autocomplete="type" />
-            <x-input-error :messages="$errors->get('type')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
+<body>
+    <div id="auth">
         
+<div class="container">
+    <div class="row">
+        <div class="col-md-7 col-sm-12 mx-auto">
+            <div class="card pt-3">
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img src="assets/images/favicon.svg" height="48" class='mb-3'>
+                        <h3>Sign Up</h3>
+                        <p>Please fill the form to register.</p>
+                    </div>
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" id="nom" class="form-control"  name="nom" required>
+                                    <x-input-error class="mt-2 bg-danger" :messages="$errors->get('nom')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="prenom">Prenom</label>
+                                    <input type="text" id="prenom" class="form-control"  name="prenom" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('prenom')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="adresse">Adresse</label>
+                                    <input type="text" id="adresse" class="form-control" name="adresse" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('adresse')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="telephone">Telephone</label>
+                                    <input type="text" id="telephone" class="form-control" name="telephone" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('telephone')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="date_naissance">Date de naissance</label>
+                                    <input type="date" id="date_naissance" class="form-control" name="date_naissance" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('date_naissance')" />
+                                </div>
+                            </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="lieu_naissance">Lieu de naissance</label>
+                                    <input type="text" id="lieu_naissance" class="form-control" name="lieu_naissance" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('lieu_naissance')" />
+                                </div>
+                            </div>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="sexe">Sexe</label>
+                                    <select id="sexe" class="form-control" name="sexe" required>
+                                        <option value="">Sélectionnez un sexe</option>
+                                        <option value="homme">Homme</option>
+                                        <option value="femme">Femme</option>
+                                    </select>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('sexe')" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="date_embauche">Date d'embauche</label>
+                                    <input type="date" id="date_embauche" class="form-control" name="date_embauche" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('date_embauche')" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="salaire">Salaire</label>
+                                    <input type="number" id="salaire" class="form-control" name="salaire" min="0" step="0.01" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('salaire')" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="solde_conges">Solde Conges</label>
+                                    <input type="number" id="solde_conges" class="form-control" name="solde_conges" min="0" step="1" required> 
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('solde_conges')" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="fonction_id">Fonction</label>
+                                    <select id="fonction_id" class="form-control" name="fonction_id" required>
+                                        <option value="">Sélectionnez une fonction</option>
+                                        <!-- Exemple d'option statique -->
+                                        <option value="1">Developpeur</option>
+                                        <option value="2">Testeur</option>
+                                        <option value="3">Designer</option>
+                                    </select>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('fonction_id')" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="service_id">Service</label>
+                                    <select id="service_id" class="form-control" name="service_id" >
+                                        <option value="">Sélectionnez un service</option>
+                                        <!-- Exemple d'option statique -->
+                                        <option value="1">Bibliothèque</option>
+                                        <option value="2">Secretariat</option>
+                                        <option value="3">Informatique</option>
+                                        <option value="4">Communication</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="type">Role</label>
+                                    <select id="type" class="form-control" name="type" required>
+                                        <option value="">Sélectionnez un rôle</option>
+                                        <!-- Exemple d'option statique -->
+                                        <option value="employe">Employe</option>
+                                        <option value="grh">Gestionnaire de ressources humaines</option>
+                                        <option value="chef_de_service">Chef de service</option>
+                                        <option value="Directeur">Directeur</option>
+                                    </select>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('type')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" name="email" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('email')" />
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" class="form-control" name="password" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('password')" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="password_confirmation">Confirmer le mot de passe</label>
+                                    <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('password_confirmation')" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a href="/login">Page de login</a>
+                        <div class="clearfix">
+                            <button class="btn btn-primary float-right">S'inscrire</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
         </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>
+
+    </div>
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

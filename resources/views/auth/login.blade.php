@@ -1,47 +1,80 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de connexion</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<body>
+
+    <div id="auth">
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 mx-auto">
+                    <div class="card pt-4">
+                        <div class="card-body">
+                            <div class="text-center mb-5">
+                                <img src="assets/images/favicon.svg" height="48" class='mb-4'>
+                                <h3>Sign In</h3>
+                                <p>Please sign in to continue to Voler.</p>
+                            </div>
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div class="form-group position-relative has-icon-left">
+                                    <label for="email">Email</label>
+                                    <div class="position-relative">
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <x-input-error class=" text-danger" :messages="$errors->get('email')" />
+                                        <div class="form-control-icon">
+                                            <i data-feather="mail"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group position-relative has-icon-left">
+                                    <div class="clearfix">
+                                    <label for="password">Mot de passe</label>
+                                    <a href="{{ route('password.request') }}" class='float-right'>
+                                        <small>Mot de passe oublié?</small>
+                                    </a>
+                                </div>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <x-input-error class="mt-2 text-danger" :messages="$errors->get('password')" />
+                                    <div class="form-control-icon">
+                                        <i data-feather="lock"></i>
+                                    </div>
+                                </div>
+
+                                <div class='form-check clearfix my-4'>
+                                    <div class="checkbox float-left">
+                                        <input type="checkbox" id="checkbox1" class='form-check-input' name="remember">
+                                        <label for="checkbox1">Remember me</label>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <button class="btn btn-primary float-right">Se connecter</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    
+    <script src="assets/js/main.js"></script>
+</body>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

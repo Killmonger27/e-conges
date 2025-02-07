@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('sexe');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('mot_de_passe');
+            $table->string('password');
             $table->date('date_embauche');
             $table->double('salaire');
             $table->integer('solde_conges');

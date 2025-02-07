@@ -30,21 +30,33 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nom' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
+            'adresse' => ['required', 'string', 'max:255'],
+            'telephone' => ['required', 'string', 'max:255'],
+            'date_naissance' => ['required', 'date'],
+            'lieu_naissance' => ['required', 'string', 'max:255'],
+            'sexe' => ['required', 'string', 'in:homme,femme'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'date_embauche' => ['required', 'date'],
             'salaire' => ['required', 'integer'],
             'solde_conges' => ['required', 'integer'],
-            'fonction_id' => ['nullable'],
-            'service_id' => ['nullable'],
+            'fonction_id' => ['nullable', 'integer'],
+            'service_id' => ['nullable', 'integer'],
             'type' => ['required', 'string', 'in:employe,chef de service,grh,directeur'],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'adresse' => $request->adresse,
+            'telephone' => $request->telephone,
+            'date_naissance' => $request->date_naissance,
+            'lieu_naissance' => $request->lieu_naissance,
+            'sexe' => $request->sexe,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password_confirmation),
             'date_embauche' => $request->date_embauche,
             'salaire' => $request->salaire,
             'solde_conges' => $request->solde_conges,

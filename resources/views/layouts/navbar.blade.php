@@ -68,7 +68,7 @@
                                 <div class="avatar  mr-1">
                                     <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
                                 </div>
-                                <div class="d-none d-md-block d-lg-inline-block">{{Auth::user()->name}} </div>
+                                <div class="d-none d-md-block d-lg-inline-block">{{Auth::user()->prenom}} </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 {{-- <a class="dropdown-item" :href="route('profile.edit')"><i data-feather="user"></i> Profile</a> --}}
