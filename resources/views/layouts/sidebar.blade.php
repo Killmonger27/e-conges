@@ -63,7 +63,7 @@
                         </li>
 
                         <li class="sidebar-item  @if (request()->is('fonctions*')) active @endif">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ route('fonctions.index') }}" class='sidebar-link'>
                                 <i data-feather="layers" width="20"></i> 
                                 <span>Fonctions</span>
                             </a>

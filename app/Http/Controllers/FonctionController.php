@@ -15,7 +15,7 @@ class FonctionController extends Controller
     public function index()
     {
         $fonctions = Fonction::all();
-        return response()->json($fonctions);
+        return view('fonctions.index', compact('fonctions'));
     }
 
     /**

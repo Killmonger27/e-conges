@@ -143,7 +143,7 @@
                                         <!-- Exemple d'option statique -->
                                         <option value="employe">Employe</option>
                                         <option value="grh">Gestionnaire de ressources humaines</option>
-                                        <option value="chef_de_service">Chef de service</option>
+                                        <option value="chef de service">Chef de service</option>
                                         <option value="Directeur">Directeur</option>
                                     </select>
                                     <x-input-error class="mt-2 text-danger" :messages="$errors->get('type')" />
