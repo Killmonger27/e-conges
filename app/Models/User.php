@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Service;
+use App\Models\Fonction;
 
 class User extends Authenticatable
 {
@@ -19,7 +21,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nom',
+        'prenom',
+        'adresse',
+        'telephone',
+        'date_naissance',
+        'lieu_naissance',
+        'sexe',
         'email',
         'password',
         'date_embauche',
@@ -29,6 +37,21 @@ class User extends Authenticatable
         'service_id',
         'type'
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function fonction()
+    {
+        return $this->belongsTo(Fonction::class, 'fonction_id');
+    }
+
+    public function servicesGeres()
+    {
+        return $this->hasOne(Service::class, 'chef_service_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
