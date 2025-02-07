@@ -71,7 +71,11 @@
                                 <div class="d-none d-md-block d-lg-inline-block">{{Auth::user()->name}} </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" :href="route('profile.edit')"><i data-feather="user"></i> Profile</a>
+                                {{-- <a class="dropdown-item" :href="route('profile.edit')"><i data-feather="user"></i> Profile</a> --}}
+                                <form action="{{route('profile.edit')}}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item"><i data-feather="log-out" width=20></i>Profile</button>
+                                </form>
                                 <div class="dropdown-divider"></div>
                                 <form action="{{route('logout')}}" method="POST">
                                     @csrf

@@ -1,64 +1,98 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
+<div class="card">
+            <div class="card-content">
+                <div class="card-body">
+                    @if (session('status') === 'profile-updated')
+                        <div 
+                            x-data="{ show: true }"
+                            x-show="show"
+                            x-transition
+                            x-init="setTimeout(() => show = false, 4000)"
+                            class="alert alert-success alert-dismissible fade show" 
+                            role="alert"
+                        >
+                            <strong>{{ __('Success!') }}</strong> {{ __('Votre profil a ete mis a jour avec succès.') }}
+                        </div>
                     @endif
+                    <form class="form form-horizontal">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Nom</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Nom" id="first-name-icon" value="{{Auth::user()->nom}}" required >
+                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('nom')" />
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Prenom</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Prenom" id="first-name-icon" value="{{Auth::user()->prenom}}" required>
+                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('prenom')" />
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Fonction</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Fonction" id="first-name-icon" value="{{Auth::user()->fonction_id}}" required>
+                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('fonction_id')" />
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="email" class="form-control" placeholder="Email" id="first-name-icon" value="{{Auth::user()->email}}" required>
+                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('email')" />
+                                            <div class="form-control-icon">
+                                                <i data-feather="mail"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Telephone</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="number" class="form-control" placeholder="Telephone" value="{{Auth::user()->telephone}}" required>
+                                            <x-input-error class="mt-2 bg-danger" :messages="$errors->get('telephone')" />
+                                            <div class="form-control-icon">
+                                                <i data-feather="phone"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end ">
+                                    <button type="submit" class="btn btn-primary mr-1 mb-1">Mettre à jour</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            @endif
+            </div>
         </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>

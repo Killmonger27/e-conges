@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
 
+
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 <body>
@@ -21,6 +22,7 @@
         @include('layouts.sidebar')
         <div id="main">
             @include('layouts.navbar')
+            {{$slot}}
         </div>
    
     </div>
@@ -33,6 +35,7 @@
     <script src="{{ asset('assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @stack('scripts')
 </body>
 </html>
