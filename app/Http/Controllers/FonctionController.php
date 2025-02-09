@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class FonctionController extends Controller
 {
+    public function create(){
+        return view('fonctions.create');
+    }
+
+    public function edit($id){
+        $fonction = Fonction::find($id);
+        return view('fonctions.edit', compact('fonction'));
+    }
     /**
      * Afficher la liste de toutes les fonctions.
      *
@@ -28,7 +36,7 @@ class FonctionController extends Controller
     {
         try {
             $fonction = Fonction::createFonction($request->all());
-            return response()->json($fonction, 201);
+            return redirect()->route('fonctions.index')->with('success', 'La fonction a été créée avec succès');
         } catch (\InvalidArgumentException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -64,7 +72,7 @@ class FonctionController extends Controller
         }
         try {
             $fonction->updateFonction($request->all());
-            return response()->json($fonction);
+            return redirect()->route('fonctions.index')->with(['message' => 'La fonction a été modifiée avec succès']);
         } catch (\InvalidArgumentException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -83,6 +91,6 @@ class FonctionController extends Controller
             return response()->json(['error' => 'Fonction non trouvée'], 404);
         }
         $fonction->delete();
-        return response()->json(['message' => 'Fonction supprimée avec succès']);
+        return redirect()->route('fonctions.index')->with(['message' => 'Fonction supprimée avec succès']);
     }
 }

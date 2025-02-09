@@ -26,8 +26,8 @@ return new class extends Migration
             $table->date('date_embauche');
             $table->double('salaire');
             $table->integer('solde_conges');
-            $table->integer('fonction_id')->nullable()->constrained('fonctions,id')->onDelete('set null');
-            $table->integer('service_id')->nullable()->constrained('services,id')->onDelete('set null');
+            $table->integer('fonction_id')->nullable()->constrained('fonctions')->onDelete('set null');
+            $table->integer('service_id')->nullable()->constrained('services')->onDelete('set null');
             $table->string('type')->default('employe');
             $table->rememberToken();
             $table->timestamps();

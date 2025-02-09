@@ -42,7 +42,7 @@
                         </li>
 
                         <li class="sidebar-item @if (request()->is('employes*')) active @endif">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{route('employes.index')}}" class='sidebar-link'>
                                 <i data-feather="file-text" width="20"></i> 
                                 <span>Employes</span>
                             </a>

@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('fonctions/{id}/edit', [FonctionController::class, 'edit'])->name('fonctions.edit');
+    Route::get('fonctions/create', [FonctionController::class, 'create'])->name('fonctions.create');
     Route::get('/fonctions', [FonctionController::class, 'index'])->name('fonctions.index');
     Route::post('/fonctions', [FonctionController::class, 'store'])->name('fonctions.store');
     Route::get('/fonctions/{id}', [FonctionController::class, 'show'])->name('fonctions.show');
@@ -37,4 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/services/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/employes', [UserController::class, 'index'])->name('employes.index');
+    Route::get('/employes/create', [UserController::class, 'create'])->name('employes.create');
+    Route::get('/employes/{id}', [UserController::class, 'show'])->name('employes.show');
+    Route::put('/employes/{id}', [UserController::class, 'update'])->name('employes.update');
+    Route::delete('/employes/{id}', [UserController::class, 'destroy'])->name('employes.destroy');
+});
 require __DIR__.'/auth.php';

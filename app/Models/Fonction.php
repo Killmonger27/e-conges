@@ -12,7 +12,7 @@ class Fonction extends Model
     use HasFactory;
     protected $table = 'fonctions';
     protected $primaryKey = 'id';
-    protected $fillable = ['nom', 'description'];
+    protected $fillable = ['intitule', 'description'];
 
     public function utilisateurs()
     {
@@ -28,7 +28,7 @@ class Fonction extends Model
     public static function validateFonctionData(array $data)
     {
         $rules = [
-            'nom' => 'required|string|max:255',
+            'intitule' => 'required|string|max:255',
             'description' => 'nullable|string',
         ];
 
