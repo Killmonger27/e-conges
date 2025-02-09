@@ -15,6 +15,10 @@ class ServiceController extends Controller
         return view('services.create');
     }
 
+    public function edit($id){
+        $service = Service::find($id);
+        return view('services.edit', compact('service'));
+    }
     /**
      * Afficher la liste de tous les services.
      *
@@ -92,6 +96,6 @@ class ServiceController extends Controller
             return response()->json(['error' => 'Service non trouvé'], 404);
         }
         $service->delete();
-        return response()->json(['message' => 'Service supprimé avec succès']);
+        return redirect()->route('services.index')->with('message', 'Service supprimé avec succès');
     }
 }

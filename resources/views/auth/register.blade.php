@@ -126,11 +126,9 @@
                                     <label for="service_id">Service</label>
                                     <select id="service_id" class="form-control" name="service_id" >
                                         <option value="">Sélectionnez un service</option>
-                                        <!-- Exemple d'option statique -->
-                                        <option value="1">Bibliothèque</option>
-                                        <option value="2">Secretariat</option>
-                                        <option value="3">Informatique</option>
-                                        <option value="4">Communication</option>
+                                        @foreach ($services as $service)
+                                            <option value="{{ $service->id }}">{{ $service->libelle }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

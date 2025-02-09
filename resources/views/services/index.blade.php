@@ -37,8 +37,12 @@
                                     
                                 @endif</td>
                                 <td class="d-md-flex justify-content-lg-between ">
-                                    <a href="#" class="btn btn-warning">Modifier</a>
-                                    <a href="#" class="btn btn-danger">Supprimer</a>
+                                    <a href="{{ route('services.edit', $service->id) }}" class="btn btn-warning">Modifier</a>
+                                    <form action="{{ route('services.destroy', $service->id) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce service ?')">Supprimer</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

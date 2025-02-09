@@ -48,7 +48,7 @@ class Service extends Model
         $rules = [
             'libelle' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'chef_service_id' => 'nullable|exists:users,id',
+            'chef_service_id' => 'nullable|exists:users',
         ];
 
         return Validator::make($data, $rules);
