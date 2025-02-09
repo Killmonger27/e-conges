@@ -15,7 +15,7 @@ class Service extends Model
     use HasFactory;
     protected $table = 'services';
     protected $primaryKey = 'id';
-    protected $fillable = ['nom', 'description', 'chef_service_id'];
+    protected $fillable = ['libelle', 'description', 'chef_service_id'];
 
     /**
      * Récupère les utilisateurs appartenant à ce service.
@@ -46,7 +46,7 @@ class Service extends Model
     public static function validateServiceData(array $data)
     {
         $rules = [
-            'nom' => 'required|string|max:255',
+            'libelle' => 'required|string|max:255',
             'description' => 'nullable|string',
             'chef_service_id' => 'nullable|exists:users,id',
         ];

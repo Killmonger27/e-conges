@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->string('libelle');
             $table->text('description');
-            $table->foreignId('chef_de_service_id')->nullable()->constrained('employes,id')->onDelete('set null');
+            $table->foreignId('chef_de_service_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

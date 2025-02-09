@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    
+    /**
+     * Afficher la page de création d'un service.
+     */
+    public function create(){
+        return view('services.create');
+    }
+
     /**
      * Afficher la liste de tous les services.
      *
@@ -15,7 +23,8 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::all();
-        return response()->json($services);
+
+        return view('services.index', compact('services'));
     }
 
     /**
@@ -28,7 +37,7 @@ class ServiceController extends Controller
     {
         try {
             $service = Service::createService($request->all());
-            return response()->json($service, 201);
+            return redirect()->route('services.index');
         } catch (\InvalidArgumentException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

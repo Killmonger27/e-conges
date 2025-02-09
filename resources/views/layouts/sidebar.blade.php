@@ -1,7 +1,7 @@
 <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img src="assets/images/logo.svg" alt="" srcset="">
+                    <img src="{{ asset('assets/images/logo.svg') }}" alt="" srcset="">
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
@@ -55,7 +55,7 @@
                         
 
                         <li class="sidebar-item  @if (request()->is('services*')) active @endif">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ route('services.index') }}" class='sidebar-link'>
                                 <i data-feather="layout" width="20"></i> 
                                 <span>Services</span>
                             </a>
