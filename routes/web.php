@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,8 +41,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/employes/edit/{id}', [UserController::class, 'edit'])->name('employes.edit');
     Route::get('/employes', [UserController::class, 'index'])->name('employes.index');
     Route::get('/employes/create', [UserController::class, 'create'])->name('employes.create');
+    Route::post('/employes', [UserController::class, 'store'])->name('employes.store');
     Route::get('/employes/{id}', [UserController::class, 'show'])->name('employes.show');
     Route::put('/employes/{id}', [UserController::class, 'update'])->name('employes.update');
     Route::delete('/employes/{id}', [UserController::class, 'destroy'])->name('employes.destroy');

@@ -13,7 +13,9 @@
                             <strong>{{ __('Success!') }}</strong> {{ __('Votre profil a ete mis a jour avec succès.') }}
                         </div>
                     @endif
-                    <form class="form form-horizontal">
+                    <form class="form form-horizontal" action="{{ route('profile.update') }}" method="POST">
+                        @csrf
+                        @method('patch')
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-4">
@@ -22,7 +24,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
-                                            <input type="text" class="form-control" placeholder="Nom" id="first-name-icon" value="{{Auth::user()->nom}}" required >
+                                            <input type="text" class="form-control" placeholder="Nom" id="first-name-icon" name="nom" value="{{Auth::user()->nom}}" required >
                                             <x-input-error class="mt-2 text-danger" :messages="$errors->get('nom')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
@@ -36,22 +38,8 @@
                                 <div class="col-md-8">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
-                                            <input type="text" class="form-control" placeholder="Prenom" id="first-name-icon" value="{{Auth::user()->prenom}}" required>
+                                            <input type="text" class="form-control" placeholder="Prenom" id="first-name-icon" name="prenom" value="{{Auth::user()->prenom}}" required>
                                             <x-input-error class="mt-2 text-danger" :messages="$errors->get('prenom')" />
-                                            <div class="form-control-icon">
-                                                <i data-feather="user"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Fonction</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="text" class="form-control" placeholder="Fonction" id="first-name-icon" value="{{Auth::user()->fonction_id}}" required>
-                                            <x-input-error class="mt-2 text-danger" :messages="$errors->get('fonction_id')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -65,7 +53,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group has-icon-left">
                                         <div class="position-relative">
-                                            <input type="email" class="form-control" placeholder="Email" id="first-name-icon" value="{{Auth::user()->email}}" required>
+                                            <input type="email" class="form-control" placeholder="Email" id="first-name-icon" name="email" value="{{Auth::user()->email}}" required>
                                             <x-input-error class="mt-2 text-danger" :messages="$errors->get('email')" />
                                             <div class="form-control-icon">
                                                 <i data-feather="mail"></i>

@@ -2,8 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Service;
+use App\Models\Fonction;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -14,8 +23,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        $employes = User::all();
+        return view('employes.index', compact('employes'));
+    }
+
+    public function edit($id)
+    {
+        $employe = User::find($id);
+        $fonctions = Fonction::all();
+        $services = Service::all();
+        return view('employes.edit', compact('employe', 'fonctions', 'services'));
+    }
+
+    public function create(){
+        $fonctions = Fonction::all();
+        $services = Service::all();
+        return view('employes.create', compact('fonctions', 'services'));
     }
 
     /**
@@ -28,7 +51,7 @@ class UserController extends Controller
     {
         try {
             $user = User::createUser($request->all());
-            return response()->json($user, 201);
+            return redirect()->route('employes.index')->with('message', 'Utilisateur créé avec succès');
         } catch (\InvalidArgumentException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -42,11 +65,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        if (!$user) {
-            return response()->json(['error' => 'Utilisateur non trouvé'], 404);
-        }
-        return response()->json($user);
+        $employe = User::find($id);
+        
+        return view('employes.show', compact('employe'));
     }
 
     /**
@@ -64,7 +85,7 @@ class UserController extends Controller
         }
         try {
             $user->updateUser($request->all());
-            return response()->json($user);
+            return redirect()->route('employes.show', $user->id);
         } catch (\InvalidArgumentException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
