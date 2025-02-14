@@ -7,12 +7,15 @@
                     <p class="text-subtitle text-muted">Vous pouvez consulter les informations de vos employés.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-last d-flex justify-content-end">
-                <a href="{{ route('employes.create') }}" >
-                    <div class="btn btn-success"><i data-feather="plus-circle"></i> Ajouter un employe</div>
-                </a>
+                    @can('gerer_employes')
+                        <a href="{{ route('employes.create') }}" >
+                            <div class="btn btn-success"><i data-feather="plus-circle"></i> Ajouter un employe</div>
+                        </a>
+                    @endcan
             </div>
             </div>
         </div>
+        
         <section class="section">
             <div class="card">
                 <div class="card-body">
@@ -28,7 +31,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($employes as $employe)
+
+                            @can("gerer_employes")
+                                @foreach($employes as $employe)
                                 <tr>
                                     <td>{{ $employe->nom }}</td>
                                     <td>{{ $employe->prenom }}</td>
@@ -57,7 +62,40 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
+                                
+                            @endcan
+                            @if(Auth::user()->type == 'chef de service')
+                                @foreach (Auth::user()->servicesGeres()->get() as $service)
+
+                                    @foreach ($service->utilisateurs as $employe)
+                                        <tr>
+                                                        <td>{{ $employe->nom }}</td>
+                                                        <td>{{ $employe->prenom }}</td>
+                                                        <td>{{ $employe->email }}</td>
+                                                        <td>
+                                                            @if ($employe->service)
+                                                                {{ $employe->service->libelle }}
+                                                            @else
+                                                                <span class="badge bg-danger">Non affecté</span>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($employe->fonction)
+                                                                {{ $employe->fonction->intitule }}
+                                                            @else
+                                                                <span class="badge bg-danger">Non définie</span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="d-md-flex justify-content-lg-between">
+                                                            <a href="{{ route('employes.show', $employe->id) }}" class="btn btn-info">Voir</a>
+                                                        </td>
+                                                    </tr>
+                                    @endforeach
+                                    
+                                @endforeach
+        
+                            @endif
                         </tbody>
                     </table>
                 </div>

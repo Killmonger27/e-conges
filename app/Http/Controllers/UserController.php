@@ -104,6 +104,6 @@ class UserController extends Controller
             return response()->json(['error' => 'Utilisateur non trouvé'], 404);
         }
         $user->delete();
-        return response()->json(['message' => 'Utilisateur supprimé avec succès']);
+        return redirect()->route('employes.index')->with('message', 'Utilisateur supprimé avec succès');
     }
 }

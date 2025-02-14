@@ -26,20 +26,20 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'nom' => 'Ahmad',
-            'prenom' => 'Saugi',
+            'nom' => 'admin',
+            'prenom' => 'admin',
             'adresse' => '12 rue de la gare',
             'telephone' => '07399750',
             'date_naissance' => '1995-01-01',
             'lieu_naissance' => 'Paris',
             'sexe' => 'homme',
-            'email' => 'grh@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
             'date_embauche' => '2020-01-01',
             'salaire' => 100000,
             'solde_conges' => 10,
-            'fonction_id' => 1,
-            'service_id' => 1,
+            'fonction_id' => null,
+            'service_id' => null,
             'type' => 'grh',
         ]);
     }

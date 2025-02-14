@@ -71,7 +71,7 @@ class User extends Authenticatable
      */
     public function servicesGeres()
     {
-        return $this->hasOne(Service::class, 'chef_service_id');
+        return $this->hasOne(Service::class, 'chef_de_service_id');
     }
 
     /**

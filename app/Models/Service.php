@@ -34,7 +34,7 @@ class Service extends Model
      */
     public function chefService(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'chef_service_id');
+        return $this->belongsTo(User::class, 'chef_de_service_id');
     }
 
     /**
@@ -48,7 +48,7 @@ class Service extends Model
         $rules = [
             'libelle' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'chef_service_id' => 'nullable|exists:users',
+            'chef_de_service_id' => 'nullable|integer',
         ];
 
         return Validator::make($data, $rules);
@@ -81,12 +81,13 @@ class Service extends Model
      */
     public function updateService(array $data)
     {
+        
         $validator = self::validateServiceData($data);
 
         if ($validator->fails()) {
             throw new \InvalidArgumentException($validator->errors()->first());
         }
-
+        $this->setChefServiceId($data['chef_de_service_id']);
         return $this->update($data);
     }
 
@@ -102,7 +103,7 @@ class Service extends Model
             throw new \InvalidArgumentException("Le chef de service avec l'ID $chefServiceId n'existe pas.");
         }
 
-        $this->chef_service_id = $chefServiceId;
+        $this->chef_de_service_id = $chefServiceId;
         return $this->save();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ServiceController extends Controller
 {
@@ -12,12 +13,23 @@ class ServiceController extends Controller
      * Afficher la page de création d'un service.
      */
     public function create(){
+
+
         return view('services.create');
     }
 
     public function edit($id){
         $service = Service::find($id);
-        return view('services.edit', compact('service'));
+        $users = $service->utilisateurs()->get();
+        $chefs = [];
+
+        foreach ($users as $user) {
+            if ($user->type == 'chef de service') {
+                $chefs[] = $user;
+            }
+        }
+        
+        return view('services.edit', compact('service', 'chefs'));
     }
     /**
      * Afficher la liste de tous les services.
@@ -77,7 +89,7 @@ class ServiceController extends Controller
         }
         try {
             $service->updateService($request->all());
-            return response()->json($service);
+            return redirect()->route('services.index')->with('message', 'Le service a été modifié avec succès');
         } catch (\InvalidArgumentException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

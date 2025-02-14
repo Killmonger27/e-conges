@@ -68,7 +68,9 @@
                         <p class="form-control-plaintext">{{ $employe->type }}</p>
                     </div>
                     <div class="col-sm-12 d-flex justify-content-end">
-                        <a href="{{ route('employes.edit', $employe->id) }}" class="btn btn-primary mr-1 mb-1">Modifier</a>
+                        @can('gerer_employes')
+                            <a href="{{ route('employes.edit', $employe->id) }}" class="btn btn-primary mr-1 mb-1">Modifier</a>
+                        @endcan
                         <a href="{{ route('employes.index') }}" class="btn btn-secondary mr-1 mb-1">Retour</a>
                     </div>
                 </div>

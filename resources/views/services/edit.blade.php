@@ -24,9 +24,9 @@
                         </div>
                         <div class="form-group">
                             <label for="chef_service_id">Directeur</label>
-                            <select class="form-control" id="chef_service_id" name="chef_service_id">
+                            <select class="form-control" id="chef_de_service_id" name="chef_de_service_id">
                                 <option value="">Aucun</option>
-                                @foreach(\App\Models\User::all() as $utilisateur)
+                                @foreach($chefs as $utilisateur)
                                     <option value="{{ $utilisateur->id }}" {{ $service->chef_service_id == $utilisateur->id ? 'selected' : '' }}>
                                         {{ $utilisateur->prenom }} {{ $utilisateur->nom }}
                                     </option>

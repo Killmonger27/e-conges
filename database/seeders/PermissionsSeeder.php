@@ -27,6 +27,7 @@ class PermissionsSeeder extends Seeder
             
             // Gestion
             'gerer_employes' ,
+            'voir_employes',
             'gerer_services' ,
             'gerer_fonctions'
         ];
@@ -46,7 +47,8 @@ class PermissionsSeeder extends Seeder
                 'creer_demande',
                 'voir_demandes_personnelles',
                 'voir_demandes_service',
-                'donner_avis'
+                'donner_avis',
+                'voir_employes'
             ],
             'grh' => [
                 'creer_demande',
