@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\EmployeCreeNotification;
 
 class UserController extends Controller
 {
@@ -51,6 +53,10 @@ class UserController extends Controller
     {
         try {
             $user = User::createUser($request->all());
+
+            Notification::route('mail', $user->email)
+            ->notify(new EmployeCreeNotification($user));
+
             return redirect()->route('employes.index')->with('message', 'Utilisateur créé avec succès');
         } catch (\InvalidArgumentException $e) {
             return response()->json(['error' => $e->getMessage()], 400);

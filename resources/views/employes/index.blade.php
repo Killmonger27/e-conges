@@ -65,8 +65,13 @@
                                 @endforeach
                                 
                             @endcan
+
                             @if(Auth::user()->type == 'chef de service')
-                                @foreach (Auth::user()->servicesGeres()->get() as $service)
+                            
+                                @if (Auth::user()->servicesGeres)
+                                    @php
+                                        $service = Auth::user()->servicesGeres;
+                                    @endphp
 
                                     @foreach ($service->utilisateurs as $employe)
                                         <tr>
@@ -93,7 +98,7 @@
                                                     </tr>
                                     @endforeach
                                     
-                                @endforeach
+                                @endif
         
                             @endif
                         </tbody>

@@ -56,7 +56,8 @@ class PermissionsSeeder extends Seeder
                 'voir_demandes_service',
                 'donner_avis',
                 'gerer_employes',
-                'gerer_fonctions'
+                'gerer_fonctions',
+                'gerer_services'
             ],
             'directeur' => [
                 'creer_demande',

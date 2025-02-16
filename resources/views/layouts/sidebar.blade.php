@@ -15,16 +15,16 @@
                         
                         <li class=" sidebar-title">Espace Personnel</li>
 
-                        <li class="sidebar-item @if (request()->is('mes-demandes*')) active @endif">
-                            <a href="#"  class='sidebar-link'>
+                        <li class="sidebar-item @if (request()->is('mesdemandes*')) active @endif">
+                            <a href="{{route('mesdemandes.index')}}"  class='sidebar-link'>
                                 <i data-feather="triangle" width="20"></i> 
                                 <span>Mes demandes</span>
                             </a>
                         </li>
 
                         
-                        <li class="sidebar-item @if (request()->is('mes-brouillons*')) active @endif">
-                            <a href="#" class='sidebar-link'>
+                        <li class="sidebar-item @if (request()->is('brouillons*')) active @endif">
+                            <a href="{{route('demandes.brouillons')}}" class='sidebar-link'>
                                 <i data-feather="briefcase" width="20"></i> 
                                 <span>Mes brouillons</span>
                             </a>
@@ -35,7 +35,7 @@
                         <li class="sidebar-title">Administration</li>
 
                         <li class="sidebar-item @if (request()->is('demandes*')) active @endif">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{route('demandes.index')}}" class='sidebar-link'>
                                 <i data-feather="file-text" width="20"></i> 
                                 <span>Demandes</span>
                             </a>
