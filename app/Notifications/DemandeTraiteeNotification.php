@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+
+class DemandeTraiteeNotification extends Notification
+{
+    use Queueable;
+
+    protected $demande;
+    protected $statut;
+
+    public function __construct($demande, $statut)
+    {
+        $this->demande = $demande;
+        $this->statut = $statut;
+    }
+
+    public function via($notifiable)
+    {
+        return ['mail'];
+    }
+
+    public function toMail($notifiable)
+    {
+        $message = (new MailMessage)
+            ->subject('Traitement de votre demande')
+            ->line('Votre demande a été traitée.')
+            ->line('Type de demande : '.$this->demande->type_de_demande)
+            ->line('Motif : '.$this->demande->motif);
+
+        if ($this->statut === 'approuvee') {
+            $message->line('Votre demande a été approuvée.');
+        } elseif ($this->statut === 'rejete') {
+            $message->line('Votre demande a été rejetée.');
+        }
+
+        $message->action('Voir les détails de la demande', url('/demandes/'.$this->demande->id));
+
+        return $message;
+    }
+}

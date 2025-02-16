@@ -8,6 +8,9 @@ use App\Models\Demande;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use App\Notifications\DemandeSoumiseNotification;
+use App\Notifications\DemandeTraiteeNotification;
+use Illuminate\Support\Facades\Notification;
 
 class DemandeController extends Controller
 {
@@ -104,7 +107,7 @@ class DemandeController extends Controller
             'action' => 'required|string|in:planifier,envoyer',
         ]);
 
-        Demande::create([
+        $demande = Demande::create([
             'motif' => $request->motif,
             'type_de_demande' => $request->type_de_demande,
             'date_de_debut' => $request->date_de_debut,
@@ -115,6 +118,29 @@ class DemandeController extends Controller
             'date_de_demande' => now()->toDateString(),
             'status' => Demande::STATUS_ENCOURS,
         ]);
+
+        $service = Service::find($demande->service_id);
+        $chefDeService = User::find($service->chef_de_service_id);
+
+        $grh = User::where('type', 'grh')->get();
+
+        foreach ($grh as $user) {
+            Notification::route('mail', $user->email)
+                ->notify(new DemandeSoumiseNotification($demande));
+        }
+
+        $directeur = User::where('type', 'directeur')->first();
+
+        if ($directeur) {
+            Notification::route('mail', $directeur->email)
+                ->notify(new DemandeSoumiseNotification($demande));
+        }
+dd($chefDeService,$directeur,$grh);
+
+        Notification::route('mail', $chefDeService->email)
+            ->notify(new DemandeSoumiseNotification($demande));
+        
+    
 
         return redirect()->route('mesdemandes.index')->with('message', 'La demande a été créée avec succès');
     }
@@ -134,6 +160,10 @@ class DemandeController extends Controller
             if ($demande->isEnCours()) {
                 $demande->status = Demande::STATUS_ACCORDE;
                 $demande->save();
+
+                Notification::route('mail', $demande->employe->email)
+                ->notify(new DemandeTraiteeNotification($demande, 'approuvee'));
+
                 return redirect()->route('demandes.index')->with('message', 'La demande a été approuvée avec succès');
             }
             return redirect()->route('demandes.index')->with('error', 'La demande ne peut pas être approuvée car elle n\'est pas en cours');
@@ -143,6 +173,8 @@ class DemandeController extends Controller
     {
             if ($demande->isEnCours()) {
                 $demande->status = Demande::STATUS_REJETE;
+                Notification::route('mail', $demande->employe->email)
+                ->notify(new DemandeTraiteeNotification($demande, 'rejetee'));
                 $demande->save();
                 return redirect()->route('demandes.index')->with('message', 'La demande a été rejetée avec succès');
             }
