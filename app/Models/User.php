@@ -97,7 +97,7 @@ class User extends Authenticatable
             'solde_conges' => ['required', 'integer'],
             'fonction_id' => ['nullable', 'exists:fonctions,id'],
             'service_id' => ['nullable', 'exists:services,id'],
-            'type' => ['required', 'string', 'in:employe,chef de service,grh,directeur'],
+            'type' => ['required', 'string', 'in:employe,chef de service,grh'],
         ];
 
         return Validator::make($data, $rules);
@@ -120,7 +120,7 @@ class User extends Authenticatable
             'solde_conges' => ['required', 'integer'],
             'fonction_id' => ['nullable', 'exists:fonctions,id'],
             'service_id' => ['nullable', 'exists:services,id'],
-            'type' => ['required', 'string', 'in:employe,chef de service,grh,directeur'],
+            'type' => ['required', 'string', 'in:employe,chef de service,grh'],
         ];
 
         return Validator::make($data, $rules);

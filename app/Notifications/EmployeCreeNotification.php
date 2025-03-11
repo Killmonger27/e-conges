@@ -30,7 +30,7 @@ class EmployeCreeNotification extends Notification
             ->line('Votre compte a été créé avec succès.')
             ->line('Nom : '.$this->employe->nom.' '.$this->employe->prenom)
             ->line('Email : '.$this->employe->email)
-            ->line('Mot de passe : '.$this->employe->password)
+            ->line('Mot de passe par defaut: 1234')
             ->line('Veuillez vous connecter à l\'application pour accéder à vos informations et modifier votre mot de passe.')
             ->line('Si vous n\'avez pas demandé de créer un compte, veuillez ignorer cet email.')
             ->line('Merci de votre compréhension.');

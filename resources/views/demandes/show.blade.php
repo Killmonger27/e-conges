@@ -42,7 +42,7 @@
                     </div>
                     <div class="row justify-content-center mt-4">
                         <div class="col-md-8 text-center">
-                            <a href="{{ route('demandes.index') }}" class="btn btn-primary">Retour à la liste des demandes</a>
+                            <a href="{{ route('demandes.index') }}" class="btn btn-primary">Retour</a>
                             @if ($demande->status === 'encours' && auth()->user()->type === 'grh')
                                 <a href="{{ route('grh.edit', $demande->id) }}" class="btn btn-info mx-2">Modifier</a>
                             @endif

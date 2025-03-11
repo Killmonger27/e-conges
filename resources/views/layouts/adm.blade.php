@@ -1,31 +1,33 @@
 {{-- resources/views/layouts/admin.blade.php --}}
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard') - Admin</title>
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/chartjs/Chart.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/1.jpg') }}" type="image/x-icon">
     <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
 
 
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
+
 <body>
     <div id="app">
         <!-- Sidebar -->
         @include('layouts.sidebar')
         <div id="main">
             @include('layouts.navbar')
-            {{$slot}}
+            {{ $slot }}
         </div>
-   
+
     </div>
 
     <!-- Scripts -->
@@ -42,4 +44,5 @@
 
     @stack('scripts')
 </body>
+
 </html>

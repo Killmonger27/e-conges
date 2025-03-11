@@ -119,28 +119,27 @@ class DemandeController extends Controller
             'status' => Demande::STATUS_ENCOURS,
         ]);
 
-        $service = Service::find($demande->service_id);
-        $chefDeService = User::find($service->chef_de_service_id);
+        if ($demande->action == "envoyer"){
+            try {
+            $service = Service::find(Auth::user()->service_id);
+            $chefDeService = User::find($service->chef_de_service_id);
+            // Notification::route('mail', $$chefDeService->email)
+            //     ->notify(new DemandeCreeNotification($demande));
+             dd($chefDeService);
+            } catch (\Throwable $th) {
+                // echo($th->message);
+            }
+            
 
-        $grh = User::where('type', 'grh')->get();
+            $grh = User::where('type', 'grh')->get();
 
-        foreach ($grh as $user) {
-            Notification::route('mail', $user->email)
-                ->notify(new DemandeSoumiseNotification($demande));
+            foreach ($grh as $user){
+                // Notification::route('mail', $user->email)
+                //     ->notify(new DemandeCreeNotification($demande));
+            }
         }
 
-        $directeur = User::where('type', 'directeur')->first();
-
-        if ($directeur) {
-            Notification::route('mail', $directeur->email)
-                ->notify(new DemandeSoumiseNotification($demande));
-        }
-dd($chefDeService,$directeur,$grh);
-
-        Notification::route('mail', $chefDeService->email)
-            ->notify(new DemandeSoumiseNotification($demande));
-        
-    
+        dd($grh);
 
         return redirect()->route('mesdemandes.index')->with('message', 'La demande a été créée avec succès');
     }

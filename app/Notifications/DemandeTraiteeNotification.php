@@ -29,7 +29,7 @@ class DemandeTraiteeNotification extends Notification
     {
         $message = (new MailMessage)
             ->subject('Traitement de votre demande')
-            ->line('Votre demande a été traitée.')
+            ->line('Votre demande du '.$this->demande->date_de_demande.' a été traitée.')
             ->line('Type de demande : '.$this->demande->type_de_demande)
             ->line('Motif : '.$this->demande->motif);
 
@@ -39,7 +39,7 @@ class DemandeTraiteeNotification extends Notification
             $message->line('Votre demande a été rejetée.');
         }
 
-        $message->action('Voir les détails de la demande', url('/demandes/'.$this->demande->id));
+        // $message->action('Voir les détails de la demande', url('/demandes/'.$this->demande->id));
 
         return $message;
     }
