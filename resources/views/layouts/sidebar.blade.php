@@ -17,7 +17,7 @@
 
                 <li class="sidebar-item @if (request()->is('mesdemandes*')) active @endif">
                     <a href="{{ route('mesdemandes.index') }}" class='sidebar-link'>
-                        <i data-feather="triangle" width="20"></i>
+                        <i data-feather="file-text" width="20"></i>
                         <span>Mes demandes</span>
                     </a>
                 </li>
@@ -43,7 +43,7 @@
 
                     <li class="sidebar-item @if (request()->is('employes*')) active @endif">
                         <a href="{{ route('employes.index') }}" class='sidebar-link'>
-                            <i data-feather="file-text" width="20"></i>
+                            <i data-feather="users" width="20"></i>
                             <span>Employes</span>
                         </a>
                     </li>
@@ -53,7 +53,7 @@
                     @if (auth()->user()->hasRole(['directeur', 'grh']))
                         <li class="sidebar-item  @if (request()->is('services*')) active @endif">
                             <a href="{{ route('services.index') }}" class='sidebar-link'>
-                                <i data-feather="layout" width="20"></i>
+                                <i data-feather="layers" width="20"></i>
                                 <span>Services</span>
                             </a>
 
@@ -61,7 +61,7 @@
 
                         <li class="sidebar-item  @if (request()->is('fonctions*')) active @endif">
                             <a href="{{ route('fonctions.index') }}" class='sidebar-link'>
-                                <i data-feather="layers" width="20"></i>
+                                <i data-feather="briefcase" width="20"></i>
                                 <span>Fonctions</span>
                             </a>
                         </li>
