@@ -4,7 +4,8 @@
             <div class="row">
                 <div class="col-12">
                     <h3>Créer un nouveau service</h3>
-                    <p class="text-subtitle text-muted">Veuillez remplir les champs suivants pour créer un nouveau service</p>
+                    <p class="text-subtitle text-muted">Veuillez remplir les champs suivants pour créer un nouveau
+                        service</p>
                 </div>
             </div>
         </div>
@@ -29,16 +30,18 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="libelle">Libellé</label>
-                                    <input type="text" id="libelle" class="form-control" name="libelle" placeholder="Libellé du service" required>
+                                    <input type="text" id="libelle" class="form-control" name="libelle"
+                                        placeholder="Libellé du service" required>
                                     <x-input-error class="mt-2 text-danger" :messages="$errors->get('libelle')" />
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <input type="text" id="description" class="form-control" name="description" placeholder="Description du service" required>
+                                    <input type="text" id="description" class="form-control" name="description"
+                                        placeholder="Description du service" required>
                                     <x-input-error class="mt-2 text-danger" :messages="$errors->get('description')" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="chef_de_service_id">Directeur</label>
+                                    <label for="chef_de_service_id">Chef de service</label>
                                     <select id="chef_de_service_id" class="form-control" name="chef_de_service_id">
                                         <option value="{{ null }}">Renseigner plus tard</option>
                                         <!-- Exemple d'option statique -->

@@ -33,18 +33,20 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="libelle">Libellé</label>
-                                    <input type="text" class="form-control" id="libelle" name="libelle" value="{{ $service->libelle }}" required>
+                                    <input type="text" class="form-control" id="libelle" name="libelle"
+                                        value="{{ $service->libelle }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
                                     <textarea class="form-control" id="description" name="description">{{ $service->description }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="chef_service_id">Directeur</label>
+                                    <label for="chef_service_id">Chef de service</label>
                                     <select class="form-control" id="chef_de_service_id" name="chef_de_service_id">
                                         <option value="">Aucun</option>
-                                        @foreach($chefs as $utilisateur)
-                                            <option value="{{ $utilisateur->id }}" {{ $service->chef_service_id == $utilisateur->id ? 'selected' : '' }}>
+                                        @foreach ($chefs as $utilisateur)
+                                            <option value="{{ $utilisateur->id }}"
+                                                {{ $service->chef_service_id == $utilisateur->id ? 'selected' : '' }}>
                                                 {{ $utilisateur->prenom }} {{ $utilisateur->nom }}
                                             </option>
                                         @endforeach
@@ -56,7 +58,8 @@
                         <!-- Boutons d'action -->
                         <div class="row justify-content-center mt-4">
                             <div class="col-md-8 text-center">
-                                <button type="submit" class="btn btn-primary mx-2">Enregistrer les modifications</button>
+                                <button type="submit" class="btn btn-primary mx-2">Enregistrer les
+                                    modifications</button>
                                 <a href="{{ route('services.index') }}" class="btn btn-secondary mx-2">Retour</a>
                             </div>
                         </div>

@@ -123,9 +123,8 @@ class DemandeController extends Controller
             try {
             $service = Service::find(Auth::user()->service_id);
             $chefDeService = User::find($service->chef_de_service_id);
-            // Notification::route('mail', $$chefDeService->email)
-            //     ->notify(new DemandeCreeNotification($demande));
-             dd($chefDeService);
+            Notification::route('mail', $$chefDeService->email)
+                ->notify(new DemandeSoumiseNotification($demande));
             } catch (\Throwable $th) {
                 // echo($th->message);
             }
@@ -134,12 +133,10 @@ class DemandeController extends Controller
             $grh = User::where('type', 'grh')->get();
 
             foreach ($grh as $user){
-                // Notification::route('mail', $user->email)
-                //     ->notify(new DemandeCreeNotification($demande));
+                Notification::route('mail', $user->email)
+                    ->notify(new DemandeSoumiseNotification($demande));
             }
         }
-
-        dd($grh);
 
         return redirect()->route('mesdemandes.index')->with('message', 'La demande a été créée avec succès');
     }

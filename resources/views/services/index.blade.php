@@ -1,56 +1,60 @@
 <x-adm-layout>
     <div class="main-content container-fluid">
-    <div class="page-title">
-        <div class="row ">
-            <div class="col-12 col-md-6 order-md-1 order-first">
-                <h3>Services</h3>
-                <p class="text-subtitle text-muted">Vous pouvez consulter et modifier les informations de vos services</p>
-            </div>
-            <div class="col-12 col-md-6 order-md-2 order-last d-flex justify-content-end">
-                <a href="{{ route('services.create') }}" >
-                    <div class="btn btn-success"><i data-feather="plus-circle"></i> Ajouter un service</div>
-                </a>
+        <div class="page-title">
+            <div class="row ">
+                <div class="col-12 col-md-6 order-md-1 order-first">
+                    <h3>Services</h3>
+                    <p class="text-subtitle text-muted">Vous pouvez consulter et modifier les informations de vos
+                        services</p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-last d-flex justify-content-end">
+                    <a href="{{ route('services.create') }}">
+                        <div class="btn btn-success"><i data-feather="plus-circle"></i> Ajouter un service</div>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <section class="section">
-        <div class="card">
-            <div class="card-body">
-                <table class='table table-striped' id="table1">
-                    <thead>
-                        <tr>
-                            <th>Libellé</th>
-                            <th>Description</th>
-                            <th>Directeur</th>
-                            <th>Actions</th> 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($services as $service)
+        <section class="section">
+            <div class="card">
+                <div class="card-body">
+                    <table class='table table-striped' id="table1">
+                        <thead>
                             <tr>
-                                <td>{{$service->libelle}}</td>
-                                <td>{{$service->description}}</td>
-                                <td>@if ($service->chefService == null)
-                                    <span class="badge bg-danger">Directeur non renseigné</span>
-                                    @else
-                                    {{$service->chefService->prenom}} {{$service->chefService->nom}}
-                                    
-                                @endif</td>
-                                <td class="d-md-flex justify-content-lg-between ">
-                                    <a href="{{ route('services.edit', $service->id) }}" class="btn btn-warning">Modifier</a>
-                                    <form action="{{ route('services.destroy', $service->id) }}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes vous sûr de vouloir supprimer ce service ?')">Supprimer</button>
-                                    </form>
-                                </td>
+                                <th>Libellé</th>
+                                <th>Description</th>
+                                <th>Chef de service</th>
+                                <th>Actions</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($services as $service)
+                                <tr>
+                                    <td>{{ $service->libelle }}</td>
+                                    <td>{{ $service->description }}</td>
+                                    <td>
+                                        @if ($service->chefService == null)
+                                            <span class="badge bg-danger">Directeur non renseigné</span>
+                                        @else
+                                            {{ $service->chefService->prenom }} {{ $service->chefService->nom }}
+                                        @endif
+                                    </td>
+                                    <td class="d-md-flex justify-content-lg-between ">
+                                        <a href="{{ route('services.edit', $service->id) }}"
+                                            class="btn btn-warning">Modifier</a>
+                                        <form action="{{ route('services.destroy', $service->id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Êtes vous sûr de vouloir supprimer ce service ?')">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-    </section>
-</div>
+        </section>
+    </div>
 </x-adm-layout>
