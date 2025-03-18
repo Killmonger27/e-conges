@@ -18,7 +18,8 @@ class DemandeController extends Controller
     {
         $service = Auth::user()->service_id;
 
-        $demandes = Demande::with('employe', 'service')->paginate(10);
+        $demandes = Demande::with('employe', 'service')->get();
+        
         $mesdemandes = Demande::where('employe_id', Auth::user()->id)
             ->with('employe', 'service')
             ->paginate(10);

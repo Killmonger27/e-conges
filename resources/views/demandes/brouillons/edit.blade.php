@@ -18,7 +18,8 @@
 
                         <div class="form-group">
                             <label for="type_de_demande">Type de demande</label>
-                            <input type="text" class="form-control" id="type_de_demande" name="type_de_demande" value="{{ $demande->type_de_demande }}" required>
+                            <input type="text" class="form-control" id="type_de_demande" name="type_de_demande"
+                                value="{{ $demande->type_de_demande }}" required>
                         </div>
 
                         <div class="form-group">
@@ -28,17 +29,20 @@
 
                         <div class="form-group">
                             <label for="date_de_debut">Date de début</label>
-                            <input type="date" class="form-control" id="date_de_debut" name="date_de_debut" value="{{ $demande->date_de_debut }}" required>
+                            <input type="date" class="form-control" id="date_de_debut" name="date_de_debut"
+                                value="{{ $demande->date_de_debut }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="date_de_fin">Date de fin</label>
-                            <input type="date" class="form-control" id="date_de_fin" name="date_de_fin" value="{{ $demande->date_de_fin }}" required>
+                            <input type="date" class="form-control" id="date_de_fin" name="date_de_fin"
+                                value="{{ $demande->date_de_fin }}" required>
                         </div>
 
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                            <a href="{{ route('demandes.show_brouillon', $demande) }}" class="btn btn-secondary">Retour</a>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <a href="{{ route('demandes.show_brouillon', $demande) }}"
+                                class="btn btn-secondary">Retour</a>
                         </div>
                     </form>
                 </div>

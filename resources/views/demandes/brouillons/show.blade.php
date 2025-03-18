@@ -4,7 +4,8 @@
             <div class="row">
                 <div class="col-12">
                     <h3>Détails de ma demande au brouillon</h3>
-                    <p class="text-subtitle text-muted">Consultez toutes les informations relatives à votre demande au brouillon.</p>
+                    <p class="text-subtitle text-muted">Consultez toutes les informations relatives à votre demande au
+                        brouillon.</p>
                 </div>
             </div>
         </div>
@@ -15,31 +16,41 @@
                     <h5 class="card-title text-center">Informations principales de la demande</h5>
                     <div class="row justify-content-center">
                         <div class="col-md-8">
-                            <p><strong>Demandeur :</strong> {{ $demande->employe->nom?? 'Non défini' }} {{ $demande->employe->prenom?? 'Non défini' }}</p>
-                            <p><strong>Type de demande :</strong> <span class="badge bg-primary">{{ ucfirst($demande->type_de_demande) }}</span></p>
+                            <p><strong>Demandeur :</strong> {{ $demande->employe->nom ?? 'Non défini' }}
+                                {{ $demande->employe->prenom ?? 'Non défini' }}</p>
+                            <p><strong>Type de demande :</strong> <span
+                                    class="badge bg-primary">{{ ucfirst($demande->type_de_demande) }}</span></p>
                             <p><strong>Motif :</strong> {{ $demande->motif }}</p>
-                            <p><strong>Date de demande :</strong> {{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/Y') }}</p>
-                            <p><strong>Période :</strong> {{ \Carbon\Carbon::parse($demande->date_de_debut)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($demande->date_de_fin)->format('d/m/Y') }}</p>
+                            <p><strong>Date de demande :</strong>
+                                {{ \Carbon\Carbon::parse($demande->created_at)->format('d/m/Y') }}</p>
+                            <p><strong>Période :</strong>
+                                {{ \Carbon\Carbon::parse($demande->date_de_debut)->format('d/m/Y') }} -
+                                {{ \Carbon\Carbon::parse($demande->date_de_fin)->format('d/m/Y') }}</p>
                         </div>
                     </div>
                     <hr class="my-4">
                     <h5 class="card-title text-center">Informations supplémentaires</h5>
                     <div class="row justify-content-center">
                         <div class="col-md-8">
-                            <p><strong>Téléphone de l'employé :</strong> {{ $demande->employe->telephone?? 'Non défini' }}</p>
-                            <p><strong>Adresse de l'employé :</strong> {{ $demande->employe->adresse?? 'Non défini' }}</p>
-                            <p><strong>Libellé du service :</strong> {{ $demande->service->libelle?? 'Non défini' }}</p>
+                            <p><strong>Téléphone de l'employé :</strong>
+                                {{ $demande->employe->telephone ?? 'Non défini' }}</p>
+                            <p><strong>Adresse de l'employé :</strong> {{ $demande->employe->adresse ?? 'Non défini' }}
+                            </p>
+                            <p><strong>Libellé du service :</strong> {{ $demande->service->libelle ?? 'Non défini' }}</p>
                         </div>
                     </div>
                     <div class="row justify-content-center mt-4">
                         <div class="col-md-8 text-center">
-                            <a href="{{ route('demandes.brouillons') }}" class="btn btn-primary">Retour à la liste des demandes au brouillon</a>
-                            <a href="{{ route('demandes.edit_brouillon', $demande) }}" class="btn btn-info mx-2">Modifier</a>
-                            <form action="{{ route('demandes.send_brouillon', $demande) }}" method="post" class="d-inline mx-2">
+                            <a href="{{ route('demandes.brouillons') }}" class="btn btn-primary">Retour</a>
+                            <a href="{{ route('demandes.edit_brouillon', $demande) }}"
+                                class="btn btn-info mx-2">Modifier</a>
+                            <form action="{{ route('demandes.send_brouillon', $demande) }}" method="post"
+                                class="d-inline mx-2">
                                 @csrf
                                 <button type="submit" class="btn btn-success">Envoyer</button>
                             </form>
-                            <form action="{{ route('demandes.destroy_brouillon', $demande) }}" method="post" class="d-inline mx-2">
+                            <form action="{{ route('demandes.destroy_brouillon', $demande) }}" method="post"
+                                class="d-inline mx-2">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Supprimer</button>

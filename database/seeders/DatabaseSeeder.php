@@ -27,13 +27,13 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'nom' => 'admin',
-            'prenom' => 'admin',
+            'prenom' => 'e-sica',
             'adresse' => '12 rue de la gare',
             'telephone' => '07399750',
             'date_naissance' => '1995-01-01',
             'lieu_naissance' => 'Paris',
             'sexe' => 'homme',
-            'email' => 'admin@gmail.com',
+            'email' => 'landryouarma45@gmail.com',
             'password' => bcrypt('12345678'),
             'date_embauche' => '2020-01-01',
             'salaire' => 100000,

@@ -1,7 +1,7 @@
 <div id="sidebar" class='active'>
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
-            <img src="{{ asset('assets/images/e-sica.png') }}" alt="Logo E-Sica" style="height: auto; width: 80%;" />
+            <img src="{{ asset('assets/images/logo.jpg') }}" alt="Logo E-Sica" style="height: auto; width: 80%;" />
         </div>
         <div class="sidebar-menu">
             <ul class="menu">

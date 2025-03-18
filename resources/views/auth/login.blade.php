@@ -23,7 +23,7 @@
                     <div class="card pt-4">
                         <div class="card-body">
                             <div class="text-center mb-5">
-                                <img src="assets/images/e-sica.png" height="150" class='mb-4'>
+                                <img src="assets/images/logo.jpg" height="150" class='mb-4'>
                                 <h3>Se connecter</h3>
                                 <p>Renseignez votre email et votre mot de passe pour accéder à e-SICA</p>
                             </div>
