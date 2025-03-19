@@ -25,11 +25,17 @@ class DemandeSoumiseNotification extends Notification
 
     public function toMail($notifiable)
     {
+        
         return (new MailMessage)
             ->subject('Nouvelle demande soumise')
-            ->line('Une nouvelle demande a été soumise.')
-            ->line('Type de demande : '.$this->demande->type_de_demande)
-            ->line('Motif : '.$this->demande->motif)
-            ->action('Voir les détails de la demande', url('/demandes/'.$this->demande->id));
+            ->line('Bonjour,')
+            ->line('Une nouvelle demande a été soumise et nécessite votre attention. Voici les détails :')
+            ->line('- Employe : ' .$this->demande->employe->nom.' '.$this->demande->employe->prenom)
+            ->line('- Type de demande : ' . $this->demande->type_de_demande)
+            ->line('- Motif : ' . $this->demande->motif)
+            ->line('- Date de soumission : ' . $this->demande->created_at->format('d/m/Y H:i'))
+            ->line('Merci de traiter cette demande dans les meilleurs délais.')
+            ->line('Cordialement,')
+            ->line('L\'équipe e-SICA');
     }
 }
