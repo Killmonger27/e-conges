@@ -50,6 +50,37 @@ class DashboardController extends Controller{
             return view('dashboard',compact('mesdemandes', 'mesdemandesvalidees', 'mesdemandesrejetees', 'mesdemandesencours', 'soldeConges', 'mesdemandesbrouillons'));
         } 
 
+        $demandesService = Demande::where('service_id',$service)->where('action','envoyer')->with('service','employe');
+
+        $demandesServiceAccorde = Demande::where('service_id',$service)
+            ->where('status','accorde')
+            ->with('service','employe');
+        
+        $demandesServiceRejete = Demande::where('service_id',$service)
+            ->where('status','rejete')
+            ->with('service','employe');
+
+        $totalEmployes = User::where('service_id',$service)->with('service','employe')->count();
+        $derniersEmployes = User::where('service_id',$service)->with('fonction')->orderBy('id', 'desc')->take(3)->get();
+        $demandesTraitees = $demandesService->where('statut','!=','encours');
+
+        if ($user->type === 'chef de service'){
+
+            return view('dashboard',compact('mesdemandes',
+            'soldeConges',
+            'demandesService',
+            'demandesServiceAccorde',
+            'demandesServiceRejete',
+            'totalEmployes',
+            'derniersEmployes',
+            'demandesTraitees',
+            'mesdemandesvalidees',
+            'mesdemandesrejetees', 
+            'mesdemandesencours',
+            'mesdemandesbrouillons',
+        ));
+        }
+
         $touteslesdemandes = Demande::where('action', 'envoyer');
 
         $enCours = Demande::where('status', 'encours')->where('action', 'envoyer');
@@ -63,10 +94,10 @@ class DashboardController extends Controller{
         $derniersServices = Service::orderBy('id', 'desc')->take(3)->get();
 
         $totalUtilisateurs = User::count();
-        $derniersUtilisateurs = User::orderBy('id', 'desc')->take(3)->get();
+        $derniersUtilisateurs = User::with('fonction')->orderBy('id', 'desc')->take(3)->get();
 
         
-        if($user->type ==='grh' || $user->type === 'chef de service'){
+        if($user->type ==='grh'){
             return view('dashboard',compact('touteslesdemandes',
             'enCours', 
             'validees', 
