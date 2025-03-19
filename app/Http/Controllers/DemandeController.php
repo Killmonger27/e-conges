@@ -121,13 +121,25 @@ class DemandeController extends Controller
         ]);
 
         if ($demande->action == "envoyer"){
-            try {
-            $service = Service::find(Auth::user()->service_id);
-            $chefDeService = User::find($service->chef_de_service_id);
-            Notification::route('mail', $$chefDeService->email)
-                ->notify(new DemandeSoumiseNotification($demande));
-            } catch (\Throwable $th) {
-                // echo($th->message);
+            $user = Auth::user();
+
+            $service = $user->service;
+
+            // Récupérer le chef de service
+            if ($service && $service->chefService) {
+                $chefDeService = $service->chefService;
+                // $chefDeService est maintenant l'utilisateur qui est le chef de service
+                try {
+                    Notification::route('mail', $chefDeService->email)
+                        ->notify(new DemandeSoumiseNotification($demande));
+                }
+                catch (\Exception $e) {
+                    // Gérer le cas où l'utilisateur n'est pas connecté
+                    throw new \Exception("L'utilisateur n'est pas connecté.");
+                }
+            } else {
+                // Gérer le cas où il n'y a pas de service ou de chef de service
+                throw new \Exception("Aucun chef de service trouvé pour cet utilisateur.");
             }
             
 
@@ -157,6 +169,18 @@ class DemandeController extends Controller
             if ($demande->isEnCours()) {
                 $demande->status = Demande::STATUS_ACCORDE;
                 $demande->save();
+                // Calculer la durée de la demande
+                $dateDebut = \Carbon\Carbon::parse($demande->date_de_debut);
+                $dateFin = \Carbon\Carbon::parse($demande->date_de_fin);
+                
+                // Calculer la durée en jours
+                // prend la date de fin moins la date de debut
+
+                $duree = $dateDebut->diffInDays($dateFin);
+                
+                $user = User::find($demande->employe_id);
+                $user->solde_conges -= $duree;
+                $user->save();
 
                 Notification::route('mail', $demande->employe->email)
                 ->notify(new DemandeTraiteeNotification($demande, 'approuvee'));
