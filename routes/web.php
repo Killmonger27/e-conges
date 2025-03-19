@@ -53,15 +53,11 @@ Route::middleware('auth','can:gerer_employes')->group(function () {
     Route::post('/employes', [UserController::class, 'store'])->name('employes.store');
     Route::put('/employes/{id}', [UserController::class, 'update'])->name('employes.update');
     Route::delete('/employes/{id}', [UserController::class, 'destroy'])->name('employes.destroy');
-});
-
-Route::middleware('auth')->group(function () {
-
     Route::get('/employes', [UserController::class, 'index'])->name('employes.index');
     
     Route::get('/employes/{id}', [UserController::class, 'show'])->name('employes.show');
-    
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/demandes', [DemandeController::class, 'index'])->name('demandes.index');
@@ -84,6 +80,14 @@ Route::middleware('auth')->group(function () {
     // Route pour rejeter une demande
     Route::post('/demandes/{demande}/reject', [DemandeController::class, 'reject'])->name('demandes.reject');
 
+
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/mesdemandes', [DemandeController::class, 'mesDemandes'])->name('mesdemandes.index');
+    Route::get('/mesdemandes/create', [DemandeController::class, 'create'])->name('mesdemandes.create');
+    Route::get('/mesdemandes/{id}', [DemandeController::class, 'showMesDemandes'])->name('mesdemandes.show');
+    Route::post('/mesdemandes', [DemandeController::class, 'store'])->name('mesdemandes.store');
     Route::get('/brouillons', [DemandeController::class, 'brouillons'])->name('demandes.brouillons');
     // Afficher le formulaire d'édition d'une demande au brouillon
     Route::get('/brouillons/{demande}/edit', [DemandeController::class, 'editBrouillon'])->name('demandes.edit_brouillon');
@@ -96,15 +100,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/brouillons/{demande}', [DemandeController::class, 'updateBrouillon'])->name('demandes.update_brouillon');
     // Envoyer une demande au brouillon
     Route::post('/brouillons/{demande}/send', [DemandeController::class, 'sendBrouillon'])->name('demandes.send_brouillon');
-
-
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/mesdemandes', [DemandeController::class, 'mesDemandes'])->name('mesdemandes.index');
-    Route::get('/mesdemandes/create', [DemandeController::class, 'create'])->name('mesdemandes.create');
-    Route::get('/mesdemandes/{id}', [DemandeController::class, 'showMesDemandes'])->name('mesdemandes.show');
-    Route::post('/mesdemandes', [DemandeController::class, 'store'])->name('mesdemandes.store');
 });
 
 require __DIR__.'/auth.php';

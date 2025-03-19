@@ -7,7 +7,7 @@
     <title>Page de connexion</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
 
-    <link rel="shortcut icon" href="assets/images/logo.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/ibam.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/app.css">
 </head>
 
