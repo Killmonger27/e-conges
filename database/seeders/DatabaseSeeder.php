@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'nom' => 'admin',
-            'prenom' => 'e-sica',
+            'nom' => 'Ouarma',
+            'prenom' => 'Landry',
             'adresse' => '12 rue de la gare',
             'telephone' => '07399750',
             'date_naissance' => '1995-01-01',
