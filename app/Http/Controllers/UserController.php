@@ -54,8 +54,8 @@ class UserController extends Controller
         try {
             $user = User::createUser($request->all());
 
-            Notification::route('mail', $user->email)
-            ->notify(new EmployeCreeNotification($user));
+            // Notification::route('mail', $user->email)
+            // ->notify(new EmployeCreeNotification($user));
 
             return redirect()->route('employes.index')->with('message', 'Utilisateur créé avec succès');
         } catch (\InvalidArgumentException $e) {
