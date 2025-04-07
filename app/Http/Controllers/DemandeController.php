@@ -120,36 +120,36 @@ class DemandeController extends Controller
             'status' => Demande::STATUS_ENCOURS,
         ]);
 
-        if ($demande->action == "envoyer"){
-            $user = Auth::user();
+        // if ($demande->action == "envoyer"){
+        //     $user = Auth::user();
 
-            $service = $user->service;
+        //     $service = $user->service;
 
-            // Récupérer le chef de service
-            if ($service && $service->chefService) {
-                $chefDeService = $service->chefService;
-                // $chefDeService est maintenant l'utilisateur qui est le chef de service
-                try {
-                    Notification::route('mail', $chefDeService->email)
-                        ->notify(new DemandeSoumiseNotification($demande));
-                }
-                catch (\Exception $e) {
-                    // Gérer le cas où l'utilisateur n'est pas connecté
-                    throw new \Exception("L'utilisateur n'est pas connecté.");
-                }
-            } else {
-                // Gérer le cas où il n'y a pas de service ou de chef de service
-                throw new \Exception("Aucun chef de service trouvé pour cet utilisateur.");
-            }
+        //     // Récupérer le chef de service
+        //     if ($service && $service->chefService) {
+        //         $chefDeService = $service->chefService;
+        //         // $chefDeService est maintenant l'utilisateur qui est le chef de service
+        //         try {
+        //             Notification::route('mail', $chefDeService->email)
+        //                 ->notify(new DemandeSoumiseNotification($demande));
+        //         }
+        //         catch (\Exception $e) {
+        //             // Gérer le cas où l'utilisateur n'est pas connecté
+        //             throw new \Exception("L'utilisateur n'est pas connecté.");
+        //         }
+        //     } else {
+        //         // Gérer le cas où il n'y a pas de service ou de chef de service
+        //         throw new \Exception("Aucun chef de service trouvé pour cet utilisateur.");
+        //     }
             
 
-            $grh = User::where('type', 'grh')->get();
+        //     $grh = User::where('type', 'grh')->get();
 
-            foreach ($grh as $user){
-                Notification::route('mail', $user->email)
-                    ->notify(new DemandeSoumiseNotification($demande));
-            }
-        }
+        //     foreach ($grh as $user){
+        //         Notification::route('mail', $user->email)
+        //             ->notify(new DemandeSoumiseNotification($demande));
+        //     }
+        // }
 
         return redirect()->route('mesdemandes.index')->with('message', 'La demande a été créée avec succès');
     }
@@ -182,8 +182,8 @@ class DemandeController extends Controller
                 $user->solde_conges -= $duree;
                 $user->save();
 
-                Notification::route('mail', $demande->employe->email)
-                ->notify(new DemandeTraiteeNotification($demande, 'approuvee'));
+                // Notification::route('mail', $demande->employe->email)
+                // ->notify(new DemandeTraiteeNotification($demande, 'approuvee'));
 
                 return redirect()->route('demandes.index')->with('message', 'La demande a été approuvée avec succès');
             }
@@ -194,8 +194,8 @@ class DemandeController extends Controller
     {
             if ($demande->isEnCours()) {
                 $demande->status = Demande::STATUS_REJETE;
-                Notification::route('mail', $demande->employe->email)
-                ->notify(new DemandeTraiteeNotification($demande, 'rejetee'));
+                // Notification::route('mail', $demande->employe->email)
+                // ->notify(new DemandeTraiteeNotification($demande, 'rejetee'));
                 $demande->save();
                 return redirect()->route('demandes.index')->with('message', 'La demande a été rejetée avec succès');
             }
